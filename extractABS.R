@@ -1,23 +1,5 @@
-#### EXTRACT ABS DATA FUNCTION ####
-#########---JUSTIN TRAN---#########
-
-# The extract_ABS function merges together all the sheets in a typical ABS
-# table into one data table.
-
-#ASSUMPTIONS
-#1
-  #the function argument (filepath) is the path to the excel file for extraction
-#2
-  #assumes the 'Data' sheets in the excel file are consecutive
-    #i.e. assumed ABS sheet format is:
-      #Index, Data1,Data2,...,DataX, Inquiries, Misc, etc
-#3
-  #removes column identifiers
-    #i.e. Unit Type, Series Type, Data Type, Data Interval, etc
-#4
-  #outputs into a data.table
-
-extractABS=function(filepath){
+#test changes
+extractABS=function(filepath,id_rows=9){
   #required libraries
   library("readxl")
   library("data.table")
@@ -36,18 +18,18 @@ extractABS=function(filepath){
   ABS_extract <-
     #all of the 'Data1' sheet
     cbind(excel_data$Data1,
-    #the rest of the DataX sheets,
-      #eval & parse for the function to interpret the concatenated input
-      eval(parse(text=paste("cbind(",
-                          #reiterate merge from Data2 to DataN
-                          paste("excel_data$Data", 2:n,
-                                #ignore the first (date) column for each
-                                  #unneeded as it is already taken from Data1
-                                  "[,-1]", sep = "", collapse = ", "), ")"))))
+          #the rest of the DataX sheets,
+          #eval & parse for the function to interpret the concatenated input
+          eval(parse(text=paste("cbind(",
+                                #reiterate merge from Data2 to DataN
+                                paste("excel_data$Data", 2:n,
+                                      #ignore the first (date) column for each
+                                      #unneeded as it is already taken from Data1
+                                      "[,-1]", sep = "", collapse = ", "), ")"))))
   #convert to data.table
   ABS_extract=as.data.table(ABS_extract)
   #remove the rows at the start with unneeded data (column identifiers)
-  ABS_extract=ABS_extract[-1:-9,]
+  ABS_extract=ABS_extract[-1:-id_rows,]
   #name the first column - Date
   setnames(ABS_extract,1,"Date",skip_absent = TRUE)
   #convert the table from characters into numeric values
