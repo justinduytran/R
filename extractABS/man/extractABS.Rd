@@ -2,7 +2,7 @@
 \alias{extractABS}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Extract data from large ABS tables%%  ~~function to do ... ~~
+Extract data from ABS tables with multiple data sheets%%  ~~function to do ... ~~
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -13,7 +13,7 @@ extractABS(filepath)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{filepath}{
-The path to the file downloaded from the ABS.%%     ~~Describe \code{filepath} here~~
+the path to the .xls or .xlsx file downloaded from ABS%%     ~~Describe \code{filepath} here~~
 }
 }
 \details{
@@ -30,7 +30,7 @@ The path to the file downloaded from the ABS.%%     ~~Describe \code{filepath} h
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+justinduytran%%  ~~who you are~~
 }
 \note{
 %%  ~~further notes~~
