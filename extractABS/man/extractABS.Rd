@@ -2,8 +2,7 @@
 \alias{extractABS}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
-}
+Extract data from ABS tables with multiple data sheets}
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
@@ -47,7 +46,7 @@ extractABS(filepath)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (filepath) 
+function (filepath)
 {
     library("readxl")
     library("data.table")
@@ -56,8 +55,8 @@ function (filepath)
     excel_data <- lapply(data_sheets, read_excel, path = filepath)
     names(excel_data) <- data_sheets
     n = length(excel_data)
-    ABS_extract <- cbind(excel_data$Data1, eval(parse(text = paste("cbind(", 
-        paste("excel_data$Data", 2:n, "[,-1]", sep = "", collapse = ", "), 
+    ABS_extract <- cbind(excel_data$Data1, eval(parse(text = paste("cbind(",
+        paste("excel_data$Data", 2:n, "[,-1]", sep = "", collapse = ", "),
         ")"))))
     ABS_extract = as.data.table(ABS_extract)
     ABS_extract = ABS_extract[-1:-9, ]

@@ -1,6 +1,6 @@
 Package: extractABS
 Type: Package
-Title: Extracts ABS data across multiple sheets into one data.table
+Title: Extracts ABS data with multiple sheets
 Version: 0.1.0
 Author: justinduytran
 Maintainer: The package maintainer <justinduytran@gmail.com>
