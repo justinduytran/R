@@ -13,7 +13,7 @@ extractABS(filepath)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{filepath}{
-the path to the .xls or .xlsx file downloaded from ABS%%     ~~Describe \code{filepath} here~~
+%%     ~~Describe \code{filepath} here~~
 }
 }
 \details{
@@ -30,7 +30,7 @@ the path to the .xls or .xlsx file downloaded from ABS%%     ~~Describe \code{fi
 %% ~put references to the literature/web site here ~
 }
 \author{
-justinduytran%%  ~~who you are~~
+%%  ~~who you are~~
 }
 \note{
 %%  ~~further notes~~
