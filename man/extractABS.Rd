@@ -7,8 +7,7 @@ Extract data from ABS tables with multiple data sheets
 }
 \description{
 This function merges together all the 'Data' sheets in a typical ABS table into one data.table.
-
-It removes the need to manually merge all Data1, Data2,etc sheets together.
+It removes the need to manually merge all Data1, Data2,...,DataN sheets together.
 
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
@@ -21,7 +20,9 @@ extractABS(filepath, id_rows = 9)
 
 %%     ~~Describe \code{filepath} here~~
 }
-  \item{id_rows}{This variable determines how many rows containing column identifers to remove from the ABS table. I.e. Unit Type, Series Type, Data Type, Data Interval, etc. By default this is assumed to be 9 and should need to change. Alternatively you could increase this to remove the earliest x-9 date entries.
+  \item{id_rows}{This variable determines how many rows containing column identifers to remove from the ABS table. I.e. Unit Type, Series Type, Data Type, Data Interval, etc.
+  By default this is assumed to be 9 and shouldn't need to be changed.
+  An alternative use is increasing this to remove the earliest x-9 date entries if you're not interested in them.
 %%     ~~Describe \code{id_rows} here~~
 }
 }

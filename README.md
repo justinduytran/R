@@ -1,6 +1,6 @@
-# R
-for my R stuff
-A line I wrote on my local computer  
-A line I wrote on my local computer  
-A line I wrote on my local computer  
-hello does this work
+# justinduytran/R
+---
+A repo for my R stuff.
+Shout out to my mum.
+It contains functions I've made to help me do stuff.
+---
