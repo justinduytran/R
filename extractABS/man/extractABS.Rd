@@ -5,18 +5,23 @@
 Extract data from ABS tables with multiple data sheets%%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+This function merges together all the 'Data' sheets in a typical ABS table into one data.table in R.
+It removes the need to manually merge each Data1, Data2,...,DataN sheet together.
+Please see the details section for assumptions and limitations.
+The function relies on the 'readxl' and 'datatable' packages.%%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
 extractABS(filepath)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{filepath}{
+  \item{filepath}{This should point to the .xls or .xlsx file downloaded from the ABS
 %%     ~~Describe \code{filepath} here~~
 }
 }
 \details{
+Assumes the 'Data' sheets in the excel file are consecutive, i.e. assumed ABS sheet format is: Index, Data1,Data2,...,DataX, Inquiries, Misc, etc.
+It assumes there are 9 column identifiers i.e. Unit Type, Series Type, Data Type, Data Interval, etc and removes them.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
