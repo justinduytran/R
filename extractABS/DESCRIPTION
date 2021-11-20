@@ -4,8 +4,7 @@ Title: Extracts ABS data across multiple sheets into one data.table
 Version: 0.1.0
 Author: justinduytran
 Maintainer: The package maintainer <justinduytran@gmail.com>
-Description: This package provides a function - extractABS(filepath) that can merge a table with multiple sheets that is downloaded from The Australian Bureau of Statistics.
-This relies upon the "data.table" and "readxl" packages.
+Description: This package provides a function - extractABS(filepath) that can merge a table with multiple sheets that is downloaded from The Australian Bureau of Statistics. This package relies upon the "data.table" and "readxl" packages.
 License: MIT license
 Encoding: UTF-8
 LazyData: true
