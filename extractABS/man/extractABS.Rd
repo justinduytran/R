@@ -11,7 +11,7 @@ extractABS(filepath)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{filepath}{
+  \item{filepath}{the path to the .xls or .xlsx file downloaded from ABS}
 %%     ~~Describe \code{filepath} here~~
 }
 }
