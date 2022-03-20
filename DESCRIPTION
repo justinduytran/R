@@ -1,11 +1,11 @@
 Package: justinduytran
 Type: Package
 Title: Justin's R functions
-Version: 0.3.0
+Version: 0.3.1
 Author: justinduytran
 Maintainer: The package maintainer <justinduytran+github@gmail.com>
 Description: This package contains my randomass R functions that I've made that sometimes can help my work (at the moment there is only one).
-Imports: tidyverse, readxl, pacman
+Imports: tidyverse, readxl
 License: MIT license
 Encoding: UTF-8
 LazyData: true
