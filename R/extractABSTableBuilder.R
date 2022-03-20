@@ -7,20 +7,22 @@
 # totals - indicate whether the Totals supplied by the ABS are required, default is no as it stuffs with Excel Pivot Tables
 
 extractABSTableBuilder = function(path, wafer = TRUE, totals = FALSE ){
-  if (!require("pacman")) install.packages("pacman")
-  pacman::p_load(tidyverse,readxl)
-  
+
+  # Load packages
+  library("tidyverse")
+  library("readxl")
+
   # Find the cells to be extracted from each sheet. This is done by finding two corner points as defined by the 'Total' row and column
   raw_extract=read_excel(path)
   bounds=which(raw_extract == "Total", arr.ind = TRUE)
-  
+
   # Reduce these bounds if totals are not required
   if (isTRUE(totals)) {
     removetotals=0
   } else {
     removetotals=-1
   }
-  
+
   # Shamelessly stolen from https://stackoverflow.com/a/52214227
   # This functions converts column reference numbers to excel column references (i.e. 2 -> B, 27 -> AA)
   # It also goes the other way (i.e. C -> 3. X -> 24) but we don't need that
@@ -52,20 +54,20 @@ extractABSTableBuilder = function(path, wafer = TRUE, totals = FALSE ){
       return(letters)
     }
   }
-  
+
   # Create blank table that we can append our 'for loop' to
   tidy_extract=data.frame()
-  
+
   # Count the number of sheets we need to use our 'for loop' for
   sheets=excel_sheets(path) %>%
     # Remove the 'template_rse' and 'format' sheets that ABS has hidden
     head(-2)
-  
+
   # For Loop to iterate over every 'wafer' sheet
   for (i in sheets){
     # This section uses the previously extracted bounds to pull out our cell ranges
     temp_extract=read_excel(path,
-                            range = 
+                            range =
                               paste(xlcolconv(bounds[1,2]),bounds[2,1]+2,
                                     ":",
                                     xlcolconv(bounds[2,2]+removetotals),bounds[1,1]+2+removetotals,
@@ -75,7 +77,7 @@ extractABSTableBuilder = function(path, wafer = TRUE, totals = FALSE ){
     # Remove first row and fix labeling (blame ABS for their crappy layout)
     colnames(temp_extract)[1] = c(temp_extract[1,1])
     temp_extract <- temp_extract[-c(1),]
-    
+
     # This reads the sheet's 'wafer' (if specified that wafers exist) and adds it as a defining column
     if (isTRUE(wafer))
       {wafer_data=read_excel(path,
@@ -84,14 +86,14 @@ extractABSTableBuilder = function(path, wafer = TRUE, totals = FALSE ){
                                            sep=""),
                              sheet = i) %>%
         colnames
-      
+
     # Add wafer identifier to the wafer
     temp_extract=cbind(wafer_data,temp_extract)
     }
-  
+
   # Append this sheet to our final data set
   tidy_extract=rbind(tidy_extract,temp_extract)
-  
+
   #End loop
   }
 
@@ -101,25 +103,25 @@ extractABSTableBuilder = function(path, wafer = TRUE, totals = FALSE ){
     str_sub(end=-3) %>%
     str_trim()
   colnames(tidy_extract)[1] = wafer_name
-  
+
   # Make into 'Long' data set (so Excel can read it into a Pivot Table)
   if (isTRUE(wafer)){
     tablebuilderextract=pivot_longer(tidy_extract,cols = -c(1,2))
   } else {
     tablebuilderextract=pivot_longer(tidy_extract,cols = -c(1))
   }
-  
+
   # Correctly label TableBuilder 'column variable' column
   colnames(tablebuilderextract)[length(names(tablebuilderextract))-1] = raw_extract[bounds[2,1],1]
-  
+
   # Rename 'value' column to show ABS Counting method
   colnames(tablebuilderextract)[length(names(tablebuilderextract))] = raw_extract[2,1]
-  
+
   # Remove 'Total' wafer if totals' are not required
   if (isFALSE(totals)) {
   tablebuilderextract=filter(tablebuilderextract, tablebuilderextract[,1] != "Total")
   }
-  
+
   # Print some notifiers for QoL
   print("Extraction from Table Builder table complete")
   print("Please use write_csv if you wish to export and use this data in an Excel Pivot Table")
